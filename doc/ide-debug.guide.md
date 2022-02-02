@@ -13,7 +13,7 @@
 	2. 其它函数断点，名称为：_start+asm源代码中的label名称，如：_start.input_chr【注意.input_chr为label名称】  
 	【也可通过gdb的info functions来查看function名称，nasm2.15+默认使用-gdwarf作为debug info format，使用info functions看不到本地名称】  
 	【但vscode中的插件，只能用dwarf才能函数断点，所以不能改dwarf】  
-	【但vscode中的插件，只能用dwarf才能函数断点，所以不能改】  
+	**【可以使用nm bin_file来查看符号表】**
 	【function断点不能取消，界面中怎么操作都不能取消，可以在gdb中通过info break + disable n/delete n命令来失效或取消】
 	3. register的内容，可以在gdb command line中p $reg来打印或在watch窗口使用，$reg来显示。
 	4. 显示console和gdb command line：View->Show Debug Console
