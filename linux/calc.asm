@@ -12,7 +12,7 @@ section .text
 	global _start:
 
 _start:
-            mov rbp, rsp; for correct debugging
+    mov rbp, rsp; for correct debugging
 	pop rdx ;put argc in rdx from the stack, so we can check number of arguments
 	cmp rdx, 4 ;compare the number of arguments against 4
 	jne few_args ; if number of arguments is less than 4 (i.e. [program-name] <operator> <operand1> <operand2>) go to error block - prompt 'FEW_ARGS' and exit
