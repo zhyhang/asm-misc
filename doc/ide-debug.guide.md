@@ -1,6 +1,7 @@
 # ide
 ##	使用sasm
-- 编辑性不太好，但可以即席debug（依赖gdb）,nasm为2.15时（sasm为3.12.1），也不能即时debug了。
+- 编辑性不太好，但可以即席debug（依赖gdb）
+- nasm为2.15+时（sasm为3.12.1），需在编译中增加-gstabs。
 	
 ##	使用vscode
 - **编辑功能强大**
@@ -18,6 +19,7 @@
 	3. register的内容，可以在gdb command line中p $reg来打印或在watch窗口使用，$reg来显示。
 	4. 显示console和gdb command line：View->Show Debug Console
 	5. 【在launch.json中配置"terminal": ""可以保证输出入输出正常，每次运行程序都会开一个terminal，ctrl+c可以结束】
+	6. 如果GDB支持step into，要保证被调用库的asm源文件在相应的目录，且要用-gdwarf来编译库（同时vscode界面中的step into也会打开库源文件来debug。
  5. 注意按config下的配置.vscode文件tasks.json和launch.json。tasks中是编译连接任务。launch是执行调用gdb启动debug。
  6. 【打开要debug的asm文件为焦点，点击vscode左侧的run/debug按钮。】
 		7.使用edb（或gdb）来调试：gdb的debug不好用在vscode中，可以只是执行一下，为了是执行tasks中的编译连接。然后使用下面介绍的edb来debug。
