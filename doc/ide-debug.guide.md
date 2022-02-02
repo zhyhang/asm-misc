@@ -42,7 +42,9 @@
 - 用官网的指导可以完成安装
 	- https://github.com/eteran/edb-debugger/wiki/Compiling-(Ubuntu)
 	
-	- 需要输入输出的console的，有两种方法：
-		1. sudo apt install xterm
+	- 程序中需要输入输出的console的，有两种方法：
+		1. sudo apt install xterm  
+		【或者修改为其它termial，如：/usr/bin/gnome-terminal】  
+		【但由于edb的bug，重启失效，可以直接修改配置文件：home/.config/codef00.com/edb.conf】
 		2. 从shell上运行edb
 
