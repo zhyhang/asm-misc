@@ -10,7 +10,7 @@
 ; Observe "_start" entry point
 ;-----------------------------------------------
 
-%define m_input_buf_size 5
+%define m_input_buf_size 1025
 %define m_calc(=x) x ; can run in nasm 2.15+
 %define m_max_input_len m_calc(m_input_buf_size - 1)
 %defstr m_max_input_len_s m_max_input_len
