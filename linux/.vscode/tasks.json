@@ -20,7 +20,7 @@
         {
             "label": "asm64",
             "type": "shell",
-            "command": "rawfilename=${fileDirname}/${fileBasenameNoExtension}.git_ignore; nasm -F dwarf -g -f elf64 -i ${fileDirname} -o $rawfilename.o ${file}; ld /data/clouds/OneDrive/code/assembly/baselibs-2020/cpu2.0/cpu2/cpu2.o -m elf_x86_64 -o $rawfilename $rawfilename.o;",
+            "command": "rawfilename=${fileDirname}/${fileBasenameNoExtension}.git_ignore; nasm -F dwarf -g -f elf64 -i ${fileDirname} -o $rawfilename.o ${file}; ld /data/clouds/OneDrive/code/assembly/baselibs-2020/cpu2.0/cpu2/cpu2.o incr.o -m elf_x86_64 -o $rawfilename $rawfilename.o;",
             "problemMatcher": {
                 "pattern": {
                     "regexp": "error"

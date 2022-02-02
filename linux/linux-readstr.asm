@@ -30,6 +30,7 @@
         extern prnintu
         extern prnreg
         extern exitx
+        extern increase_one
 
         section .data align=32
 msg_buf_alloc_err:  db 'Allocate mem fatal error!', 0ah, 0
@@ -39,7 +40,8 @@ msg_output_a:       db '):', 0ah, 0
 msg_overflow:       db m_msg_over_input_buf, 0ah, 0
 
         section .text
-_start:              
+_start:
+        mov     rbp,rsp ; for sasm debug            
         ; todo loop run, terminate when receive ctrl+c
         ; todo clear over length input
         ;>>>>buffer allocation
@@ -61,7 +63,10 @@ _start:
         mov     [rbx], al
         cmp     al, 0ah ;meet the enter, finish
         je      .prn_input
-        inc     rbx
+        ;>>>>rbx++, using lib call (for test)
+        mov     rdi,rbx
+        call    increase_one
+        mov     rbx,rax
         inc     r13
         cmp     r13, m_max_input_len
         jnl     .prn_overflow ;reach to the max buffer length      
