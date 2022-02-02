@@ -10,13 +10,12 @@
 ; Observe "_start" entry point
 ;-----------------------------------------------
 
-%define m_input_buf_size 65
+%define m_input_buf_size 5
 %define m_calc(=x) x ; can run in nasm 2.15+
 %define m_max_input_len m_calc(m_input_buf_size - 1)
 %defstr m_max_input_len_s m_max_input_len
 ;%define m_max_input_len m_input_buf_size - 1 ; can run in nasm 2.14+
 ;%defstr m_max_input_len_s m_max_input_len
-%strcat m_msg_over_input_buf '(!!Reach max input length(',m_max_input_len_s,')!!'
 
         ;default rel
         global _start
@@ -25,25 +24,23 @@
         extern prnstrz
         extern prnline
         extern readch
-        extern readchr
         extern readstr
         extern prnintu
-        extern prnreg
         extern exitx
         extern increase_one
 
+
         section .data align=32
 msg_buf_alloc_err:  db 'Allocate mem fatal error!', 0ah, 0
-msg_input:          db 'Please enter your chars:', 0ah, 0 ;in sasm input window will not work, save exe and test in shell
+msg_input:          db 'Please enter your chars (max length=', m_max_input_len_s,')', 0ah, 0
 msg_output_b:       db 'Your input is (len=', 0
 msg_output_a:       db '):', 0ah, 0
-msg_overflow:       db m_msg_over_input_buf, 0ah, 0
+msg_overflow:       db 0ah,'!!Over max input length, discard extra chars!!', 0ah, 0
 
         section .text
 _start:
         mov     rbp,rsp ; for sasm debug            
         ; todo loop run, terminate when receive ctrl+c
-        ; todo clear over length input
         ;>>>>buffer allocation
         mov     rdi, m_input_buf_size
         call    mem_alloc
@@ -73,6 +70,7 @@ _start:
         jmp     .read_input_chr
         
 .prn_overflow:
+        call    __swallon_over_input
         mov     rdi, msg_overflow
         call    prnstrz
         
@@ -97,3 +95,10 @@ _start:
         
 .normal_exit:
         call    exitx
+
+__swallon_over_input:
+        call    readch
+        cmp     al, 0ah ;meet the enter, finish
+        jne     __swallon_over_input
+        ret
+
