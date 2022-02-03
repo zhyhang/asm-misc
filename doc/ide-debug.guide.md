@@ -30,8 +30,9 @@
 	参见《gdb and assembly.pdf》
 1. gdb 要执行的文件
 2. layout asm ;显示汇编指令
-3. info functions ;查看函数（符号表）
+3. info functions ;查看函数（符号表），或使用shell命令，nm bin_file来查看
 4. b(reak) *fun_name+offset addr 或者 b fun_name 或者 b addr ;设置断点
+4. info break 查看断点;disable n/delete n屏蔽或删除断点
 5. r(run) ;运行
 6. ni [n] ;step over, n步
 7. print $reg
