@@ -36,10 +36,9 @@
 6. ni [n] ;step over, n步
 7. print $reg
 	
-	
-	
-	
 # edb
+- 主要用于linux，也可以用于win10/macOs【是试验版】
+- 支持arm/x86/x64
 - url: https://github.com/eteran/edb-debugger
 - 用官网的指导可以完成安装
 	- https://github.com/eteran/edb-debugger/wiki/Compiling-(Ubuntu)
@@ -49,4 +48,11 @@
 		【或者修改为其它termial，如：/usr/bin/gnome-terminal】  
 		【但由于edb的bug，重启失效，可以直接修改配置文件：home/.config/codef00.com/edb.conf】
 		2. 从shell上运行edb
+
+# x64dbg
+
+- win10-x64调试器
+- 用于逆向工程和分析
+- 官网
+	- https://github.com/x64dbg/x64dbg
 
