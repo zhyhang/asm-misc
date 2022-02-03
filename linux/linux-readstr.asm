@@ -49,8 +49,8 @@ msg_overflow:       db 0ah,'!!Over max input length, discard extra chars!!', 0ah
 
         section .text
 _start:
-        mov     rbp,rsp ; for sasm debug            
-        
+        mov     rbp,rsp ; for sasm debug
+
         ;>>>>buffer allocation
         mov     rdi, INPUT_BUF_SIZE
         call    mem_alloc
@@ -58,14 +58,14 @@ _start:
         je      .fatal_error_exitx
         mov     r12, rax ;save buffer address, according to ABI, callee is responsible of keeping r12-r15 original value
 
-.begin_input:        
+.begin_input:
         mov     rbx, r12
 
         ;>>>>print message
         mov     rdi, msg_input
         call    prnstrz
-        
-        ;>>>>loop read ch 
+
+        ;>>>>loop read ch
         xor     r13, r13
 .read_input_chr:
         call    readch
@@ -78,17 +78,17 @@ _start:
         mov     rbx,rax
         inc     r13
         cmp     r13, MAX_INPUT_LEN
-        jnl     .prn_overflow ;reach to the max buffer length      
+        jnl     .prn_overflow ;reach to the max buffer length
         jmp     .read_input_chr
-        
+
 .prn_overflow:
         call    __swallon_over_input
         mov     rdi, msg_overflow
         call    prnstrz
-        
+
 .prn_input:
         call    prnline
-        
+
         mov     byte [rbx], 0 ;change last char to 0
         mov     rdi, msg_output_b
         call    prnstrz
@@ -96,22 +96,22 @@ _start:
         call    prnintu
         mov     rdi, msg_output_a
         call    prnstrz
-        
+
         mov     rdi, r12
         call    prnstrz
-        
+
         call    __check_exit_cmd
         test    rax, 1
         jnz     .normal_exit
-        
+
         call    prnline
         call    prnline
         jmp     .begin_input ;loop run
-        
+
 .fatal_error_exitx:
         mov     rdi, msg_buf_alloc_err
         call    prnstrz
-        
+
 .normal_exit:
         call    exitx
 
